@@ -1,301 +1,247 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine Surprise ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Be My Valentine 💖</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
-
 body{
-  min-height:100vh;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Poppins',sans-serif;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    overflow:hidden;
 }
 
-/* ❤️🌹 RAIN */
-.rain{
-  position:fixed;
-  top:-20px;
-  pointer-events:none;
-  animation:fall linear forwards;
-  opacity:0.9;
+/* Card */
+.card{
+    width:90%;
+    max-width:420px;
+    padding:45px 30px;
+    border-radius:25px;
+    text-align:center;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.2);
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+    transition:0.4s;
+}
+.card:hover{
+    transform:translateY(-8px);
+}
+
+h2,p{color:white}
+
+/* Buttons */
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    margin:10px;
+    font-size:15px;
+    cursor:pointer;
+    font-weight:600;
+    background:#ff0033;
+    color:white;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(255,0,50,0.5);
+}
+button:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 30px rgba(255,0,50,0.7),
+               0 0 20px white;
+}
+
+/* Typewriter */
+.typewriter{
+    border-right:3px solid white;
+    white-space:nowrap;
+    overflow:hidden;
+    display:inline-block;
+}
+
+/* Gift Page */
+.gift-page{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    color:white;
+    z-index:2000;
+    padding:20px;
+}
+.gift-page img{
+    width:90%;
+    max-width:320px;
+    border-radius:20px;
+    margin-bottom:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* Rose Petals */
+.petal{
+    position:absolute;
+    top:-10px;
+    font-size:20px;
+    animation: fall linear infinite;
 }
 @keyframes fall{
-  to{transform:translateY(110vh);opacity:0;}
+    to{ transform: translateY(100vh) rotate(360deg); opacity:0;}
 }
 
-/* 🎆 CONFETTI */
-.confetti{
-  position:fixed;
-  width:8px;
-  height:14px;
-  animation:confettiFall linear forwards;
-}
-@keyframes confettiFall{
-  to{transform:translateY(110vh) rotate(360deg);}
-}
-
-/* 💳 CARD */
-.card{
-  background:linear-gradient(145deg,#fff0f5,#ffe4ec);
-  color:#7a1f3d;
-  width:92%;
-  max-width:420px;
-  border-radius:26px;
-  padding:30px;
-  text-align:center;
-  box-shadow:
-    0 20px 40px rgba(255,77,109,0.35),
-    inset 0 0 0 1px rgba(255,255,255,0.6);
-  position:relative;
-  z-index:10;
-
-  animation:popupCard 1.4s cubic-bezier(.17,.89,.32,1.49);
-  transition:transform 0.45s ease, box-shadow 0.45s ease;
-}
-
-.card:hover{
-  transform:translateY(-10px) scale(1.03);
-  box-shadow:
-    0 35px 70px rgba(255,77,109,0.45),
-    0 0 0 6px rgba(255,182,193,0.35);
-}
-
-@keyframes popupCard{
-  0%{
-    opacity:0;
-    transform:scale(0.75) translateY(40px);
-  }
-  60%{
-    opacity:1;
-    transform:scale(1.05);
-  }
-  100%{
-    transform:scale(1);
-  }
-}
-
-.card h1,
-.card h2,
-.card h3{
-  color:#ff2f68;
-}
-
-.card p{
-  font-size:14px;
-  color:#7a1f3d;
-  margin-bottom:14px;
-}
-
-/* BUTTONS */
-.buttons{
-  position:relative;
-  height:64px;
-}
-
-button{
-  border:none;
-  padding:12px 26px;
-  border-radius:30px;
-  font-size:15px;
-  cursor:pointer;
-}
-
-/* YES BUTTON ❤️ */
-.yes{
-  background:#ff4d6d;
-  color:#fff;
-  box-shadow:0 10px 25px rgba(255,77,109,0.5);
-  animation:heartbeat 1.6s infinite;
-}
-
-@keyframes heartbeat{
-  0%{transform:scale(1);}
-  25%{transform:scale(1.08);}
-  50%{transform:scale(1);}
-  75%{transform:scale(1.08);}
-  100%{transform:scale(1);}
-}
-
-/* NO BUTTON */
-.no{
-  background:#ffe4ec;
-  position:absolute;
-}
-
-/* SUCCESS CARD */
-.success{
-  display:none;
-  background:linear-gradient(160deg,#ffe4ec,#fff);
-  animation:successReveal 1.3s ease forwards;
-}
-
-@keyframes successReveal{
-  from{
-    opacity:0;
-    transform:scale(0.8) rotateX(20deg);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-}
-
-/* 💍 RING */
-.ring{
-  font-size:60px;
-  animation:ringPop 1.2s ease forwards;
-}
-@keyframes ringPop{
-  0%{transform:scale(0);}
-  60%{transform:scale(1.3);}
-  100%{transform:scale(1);}
-}
-
-/* 📸 SLIDESHOW */
-.slideshow{
-  margin-top:14px;
-  width:100%;
-  height:220px;
-  border-radius:18px;
-  overflow:hidden;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.slideshow img{
-  width:100%;
-  height:100%;
-  object-fit:contain;   /* 👈 IMPORTANT */
-  animation:fadeSmooth 4s infinite;
-}
-
-/* smoother animation – no zoom cut */
-@keyframes fadeSmooth{
-  0%{opacity:0;}
-  10%{opacity:1;}
-  90%{opacity:1;}
-  100%{opacity:0;}
-}
-
-
-@media(min-width:768px){
-  .card{max-width:480px;}
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2023/02/14/audio_46b4c7bb41.mp3">
+<!-- Romantic Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
 </audio>
 
-<!-- QUESTION CARD -->
-<div class="card" id="mainCard">
-  <h2>Hey My Love ❤️</h2>
-  <p>Every Smile of yours feels like home.Every moment with you feels like magics. and today....... I just hav one important question.</p>
-  <p>Will you be my Valentine?</p>
-  <p><b>Choose wisely 😏💘</b></p>
+<canvas id="confetti"></canvas>
 
-  <div class="buttons" id="btnArea">
-    <button class="yes" onclick="sayYes()">YES 💖</button>
-    <button class="no" id="noBtn">NO 🙃</button>
-  </div>
+<div class="card">
+
+<div id="mainPage">
+    <h2>Hey My Love 💕</h2>
+    <p id="typeText" class="typewriter"></p>
+    <div id="buttons">
+        <button onclick="showSecond()">Yes of course 💖</button>
+        <button onclick="showTry()">No thanks</button>
+    </div>
 </div>
 
-<!-- SUCCESS CARD -->
-<div class="card success" id="successCard">
-  <h1>YAYYYY ❤️🎉</h1>
-  <h2>Congratulations ❤️</h2>
-  <p>You are officially, proudly, and forever…</p>
-  <h3>❤️ The Valentine of ❤️</h3>
-  <h1>Satyaveer Singh ❤️</h1>
-  <p><b>Happy Valentine’s Day 🌹✨</b></p>
+<div id="secondPage" style="display:none;">
+    <h2>Yay, You said Yes! 🎉💘</h2>
+    <button onclick="openGift(1)">Gift 1 🎁</button>
+    <button onclick="openGift(2)">Gift 2 🎀</button>
+    <button onclick="openGift(3)">Gift 3 💝</button>
+</div>
 
-  <div class="slideshow">
-    <img id="slide" src="https://i.ibb.co/67gMBCQk/Media-35-200px.jpg">
-  </div>
+</div>
+
+<!-- Gift Page -->
+<div class="gift-page" id="giftPage">
+    <img id="giftImage">
+    <h2 id="giftTitle"></h2>
+    <p id="giftContent"></p>
+    <button onclick="closeGift()">Back 💕</button>
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
-const btnArea = document.getElementById("btnArea");
-const music = document.getElementById("music");
-
-function moveNo(){
-  const area = btnArea.getBoundingClientRect();
-  noBtn.style.left = Math.random()*(area.width-80)+"px";
-  noBtn.style.top = Math.random()*(area.height-40)+"px";
+/* Typewriter */
+const message="Will you be my Valentine? 💖";
+let i=0;
+function typeWriter(){
+    if(i<message.length){
+        document.getElementById("typeText").innerHTML+=message.charAt(i);
+        i++;
+        setTimeout(typeWriter,80);
+    }
 }
-noBtn.addEventListener("mouseenter", moveNo);
-noBtn.addEventListener("touchstart", moveNo);
+typeWriter();
 
-/* ❤️🌹 Rain */
-function rain(speed){
-  setInterval(()=>{
-    const el=document.createElement("div");
-    el.className="rain";
-    el.innerHTML=Math.random()>0.5?"❤️":"🌹";
-    el.style.left=Math.random()*100+"vw";
-    el.style.fontSize=16+Math.random()*24+"px";
-    el.style.animationDuration=4+Math.random()*3+"s";
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),7000);
-  },speed);
+/* Button Flow */
+function showTry(){
+    document.getElementById("buttons").innerHTML=
+        '<button onclick="showYes()">Try Again 💔</button>';
 }
-rain(800);
-
-/* 🎆 Confetti */
-function confetti(){
-  for(let i=0;i<80;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    c.style.animationDuration=3+Math.random()*3+"s";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),6000);
-  }
+function showYes(){
+    document.getElementById("buttons").innerHTML=
+        '<button onclick="showSecond()">Yes Of Course 💖</button>';
+}
+function showSecond(){
+    document.getElementById("mainPage").style.display="none";
+    document.getElementById("secondPage").style.display="block";
+    startConfetti();
+    document.getElementById("bgMusic").play();
 }
 
-/* 📸 Slideshow */
-const images=[
-  "https://i.ibb.co/JjBzpxP5/Media-34-200px.jpg",
-  "https://i.ibb.co/FkZ55v0f/image-200px.jpg",
-  "https://i.ibb.co/nNRGYMvz/Media-32-200px.jpg",
-  "https://i.ibb.co/67gMBCQk/Media-35-200px.jpg"
-];
-let idx=0;
-setInterval(()=>{
-  const img=document.getElementById("slide");
-  if(img){
-    idx=(idx+1)%images.length;
-    img.src=images[idx];
-  }
-},4000);
+/* Gift Logic */
+function openGift(num){
+    let image="",title="",content="";
+    if(num==1){
+        image="https://artiflora-madagascar.com/wp-content/uploads/2024/01/10-red-roses-bouquet.jpg";
+        title="A Beautiful Rose Bouquet 🌹";
+        content="This bouquet is filled with love and happiness just for you!";
+    }
+    if(num==2){
+        image="https://www.24hrscityflorist.com/blog/wp-content/uploads/2024/12/Red-rose_edited2.jpg";
+        title="Romantic Surprise 💕";
+        content="Every rose whispers how special you are.";
+    }
+    if(num==3){
+        image="https://artiflora-madagascar.com/wp-content/uploads/2021/12/101-Red-Roses-Valentines-Day-Bouquet.jpg";
+        title="Forever Love 💘";
+        content="This bouquet represents pure love and forever happiness.";
+    }
 
-/* YES */
-function sayYes(){
-  document.getElementById("mainCard").style.display="none";
-  document.getElementById("successCard").style.display="block";
-  music.play();
-  confetti();
-  rain(250);
+    document.getElementById("giftImage").src=image;
+    document.getElementById("giftTitle").innerText=title;
+    document.getElementById("giftContent").innerText=content;
+    document.getElementById("giftPage").style.display="flex";
+    startPetals();
+}
+function closeGift(){
+    document.getElementById("giftPage").style.display="none";
+}
+
+/* Petals */
+function startPetals(){
+    for(let i=0;i<20;i++){
+        let petal=document.createElement("div");
+        petal.className="petal";
+        petal.innerHTML="🌹";
+        petal.style.left=Math.random()*100+"vw";
+        petal.style.animationDuration=(3+Math.random()*3)+"s";
+        document.body.appendChild(petal);
+        setTimeout(()=>petal.remove(),6000);
+    }
+}
+
+/* Confetti */
+function startConfetti(){
+    const canvas=document.getElementById("confetti");
+    const ctx=canvas.getContext("2d");
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+    let confetti=[];
+    for(let i=0;i<100;i++){
+        confetti.push({
+            x:Math.random()*canvas.width,
+            y:Math.random()*canvas.height,
+            r:Math.random()*6+2,
+            color:"white"
+        });
+    }
+    setInterval(()=>{
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        confetti.forEach(c=>{
+            ctx.beginPath();
+            ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
+            ctx.fillStyle=c.color;
+            ctx.fill();
+            c.y+=3;
+            if(c.y>canvas.height)c.y=0;
+        });
+    },20);
 }
 </script>
 
