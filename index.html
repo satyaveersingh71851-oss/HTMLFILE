@@ -1,249 +1,1320 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Satyaveer Singh | Zoho One Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine 💖</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+:root{
+  --bg:#0b0b0b;
+  --text:#ffffff;
+  --pill:#0f0f0f;
+  --cta:#ccff5a;
+}
+
+body.light{
+  --bg:#ffffff;
+  --text:#000000;
+  --pill:#f5f5f5;
+}
+body.light .about-right{
+  box-shadow:
+    inset 0 0 0 1.5px rgba(0,0,0,.12),
+    0 30px 70px rgba(0,0,0,.18);
+}
+
+/* subtle highlight line */
+body.light .about-right::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:22px;
+  pointer-events:none;
+  box-shadow:0 0 0 1px rgba(204,255,90,.35);
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,Arial,sans-serif;
+}
+
 body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:'Poppins',sans-serif;
-    background: linear-gradient(135deg,#ff758c,#ff7eb3);
-    overflow:hidden;
+  background:var(--bg);
+  color:var(--text);
+  min-height:200vh;
+  transition:.4s;
 }
 
-/* Card */
-.card{
-    width:90%;
-    max-width:420px;
-    padding:45px 30px;
-    border-radius:25px;
-    text-align:center;
-    backdrop-filter: blur(20px);
-    background: rgba(255,255,255,0.2);
-    box-shadow:0 20px 50px rgba(0,0,0,0.4);
-    transition:0.4s;
-}
-.card:hover{
-    transform:translateY(-8px);
+/* ================= HEADER ================= */
+.header-wrap{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:999;
 }
 
-h2,p{color:white}
-
-/* Buttons */
-button{
-    padding:12px 25px;
-    border:none;
-    border-radius:30px;
-    margin:10px;
-    font-size:15px;
-    cursor:pointer;
-    font-weight:600;
-    background:#ff0033;
-    color:white;
-    transition:0.3s;
-    box-shadow:0 5px 15px rgba(255,0,50,0.5);
-}
-button:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 30px rgba(255,0,50,0.7),
-               0 0 20px white;
+header{
+  margin:14px auto;
+  width:95%;
+  max-width:1400px;
+  background:var(--pill);
+  border-radius:70px;
+  padding:22px 34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  transition:.4s ease;
 }
 
-/* Typewriter */
-.typewriter{
-    border-right:3px solid white;
-    white-space:nowrap;
-    overflow:hidden;
-    display:inline-block;
+header.small{
+  padding:12px 28px;
+  box-shadow:0 12px 35px rgba(0,0,0,.35);
 }
 
-/* Gift Page */
-.gift-page{
-    position:fixed;
+.logo{
+  font-size:28px;
+  font-weight:700;
+  color:var(--text);
+}
+
+nav{
+  display:flex;
+  gap:36px;
+}
+
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  opacity:.85;
+  position:relative;
+}
+nav a:hover{opacity:1;}
+
+.right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.toggle{
+  width:42px;height:42px;
+  border-radius:50%;
+  border:none;
+  background:transparent;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.cta{
+  position:relative;
+  background:var(--cta);
+  color:#000;
+  padding:14px 30px;
+  border-radius:60px;
+  text-decoration:none;
+  font-weight:600;
+  overflow:hidden;
+  transition:.45s cubic-bezier(.135,.9,.15,1);
+}
+
+/* subtle shine layer */
+.cta::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,.55),
+    transparent 70%
+  );
+  transform:translateX(-120%);
+  transition:.6s cubic-bezier(.135,.9,.15,1);
+}
+
+/* arrow animation */
+.cta::after{
+  content:"↗";
+  position:absolute;
+  right:22px;
+  top:50%;
+  transform:translateY(-50%) translateX(-6px);
+  opacity:0;
+  transition:.45s cubic-bezier(.135,.9,.15,1);
+}
+
+/* HOVER EFFECT */
+.cta:hover{
+  padding-right:48px;
+  box-shadow:0 20px 60px rgba(204,255,90,.45);
+  transform:translateY(-2px);
+}
+
+.cta:hover::before{
+  transform:translateX(120%);
+}
+
+.cta:hover::after{
+  opacity:1;
+  transform:translateY(-50%) translateX(0);
+}
+
+
+/* ================= CENTER GLASS CARD ================= */
+.intro-wrap{
+  position:relative;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  margin-top:160px;
+  z-index:5;
+}
+
+.intro-card{
+  padding:30px 50px;
+  border-radius:28px;
+  backdrop-filter:blur(18px);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  text-align:center;
+  box-shadow:0 30px 90px rgba(0,0,0,.35);
+  transition:.4s;
+}
+
+.intro-card,
+.intro-card h1,
+.intro-card p{
+  color:var(--text);
+}
+
+body.light .intro-card{
+  background:rgba(0,0,0,.04);
+  border-color:rgba(0,0,0,.12);
+}
+
+.intro-card h1{
+  font-size:40px;
+  font-weight:700;
+}
+
+.intro-card h1 span{
+  color:var(--cta);
+}
+
+body.light .intro-card h1 span{
+  color:#000;
+}
+
+.intro-card p{
+  margin-top:10px;
+  font-size:16px;
+  opacity:.75;
+}
+
+/* ================= ROTATING ZOHO LOGOS ================= */
+.rotator-wrap{
+  width:100%;
+  height:45vw;   /* ✅ reduced height */
+  max-height:520px; /* ✅ limit */
+  overflow:hidden;
+  margin-top:30px;
+}
+
+
+.js-arched-image-container{
+  position:relative;
+  width:260vw;
+  height:260vw;
+  margin-left:-80vw;
+  transform:rotate(-170deg);
+}
+
+.js-arched-image-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+}
+
+.js-arched-image-item{
+  position:absolute;
+  top:0;
+  left:50%;
+  height:50%;
+  width:22vw;
+  transform-origin:bottom left;
+}
+
+.js-arched-image-item > div{
+  width:100%;
+  padding-top:100%;
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  background:transparent; /* ❌ white hata diya */
+}
+
+.js-arched-image-item img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover; /* 🔥 full cover */
+  padding:0;       /* ❌ padding hata di */
+  transition:.4s;
+  filter:invert(1);
+}
+
+
+body.light .js-arched-image-item img{
+  filter:invert(0);
+}
+
+/* ================= ABOUT ME ================= */
+.about-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:30px;
+  align-items:center;
+  margin-top:-50px; /* reduced gap */
+  padding:0 5%;
+}
+
+.about-left{
+  flex:1 1 400px;
+}
+
+.about-left h2{
+  font-size:32px;
+  margin-bottom:16px;
+}
+
+.about-left p{
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* ================= PROFILE IMAGE CARD ================= */
+.about-right{
+  flex:1 1 300px;
+  position:relative;
+  height:380px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+
+  /* DARK THEME DEFAULT */
+  background:
+    radial-gradient(circle at top, rgba(204,255,90,.25), transparent 55%),
+    linear-gradient(145deg, #0d0d0d, #151515);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 35px 90px rgba(0,0,0,.55);
+
+  transition:.45s cubic-bezier(.135,.9,.15,1);
+}
+
+/* LIGHT THEME */
+body.light .about-right{
+  background:
+    radial-gradient(circle at top, rgba(0,0,0,.08), transparent 55%),
+    linear-gradient(145deg, #ffffff, #f2f2f2);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.08),
+    0 25px 60px rgba(0,0,0,.18);
+}
+
+/* GLASS FRAME */
+.about-right::before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border-radius:18px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(8px);
+  z-index:1;
+}
+
+/* LIGHT THEME GLASS */
+body.light .about-right::before{
+  background:rgba(0,0,0,.04);
+}
+
+/* IMAGE */
+.about-right img{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:26px;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.45));
+  transition:.45s cubic-bezier(.135,.9,.15,1);
+}
+
+/* HOVER */
+.about-right:hover img{
+  transform:scale(1.04);
+}
+
+/* SMOOTH THEME MORPH */
+.about-right,
+.about-right::before,
+.about-right::after,
+.about-right img{
+  transition:
+    background .6s cubic-bezier(.135,.9,.15,1),
+    box-shadow .6s cubic-bezier(.135,.9,.15,1),
+    transform .6s cubic-bezier(.135,.9,.15,1),
+    filter .6s cubic-bezier(.135,.9,.15,1);
+}
+
+
+/* FULL OVERLAY */
+.full-overlay{
+    -webkit-text-size-adjust:100%;
+    font-size:1rem;
+    --swiper-theme-color:#007aff;
+    --swiper-navigation-size:44px;
+    tab-size:4;
+    --vh:6.65px;
+    line-height:inherit;
+    font-family:Oldschool Grotesk,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    --tw-text-opacity:1;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-.025em;
+    text-rendering:optimizeLegibility;
+    --tw-bg-opacity:1;
+    list-style:none;
+    box-sizing:border-box;
+    border:0 solid #999a9a;
+    --tw-shadow:0 0 transparent;
+    --tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);
+    --tw-ring-offset-width:0px;
+    --tw-ring-offset-color:#fff;
+    --tw-ring-color:rgba(59,130,246,0.5);
+    --tw-ring-offset-shadow:0 0 transparent;
+    --tw-ring-shadow:0 0 transparent;
+    color:inherit;
+    text-decoration:inherit;
+    transition-property:all;
+    transition-timing-function:cubic-bezier(.135,.9,.15,1);
+    transition-duration:.9s;
+    height:100%;
+    position:absolute;
     top:0;
     left:0;
     width:100%;
-    height:100%;
-    background: linear-gradient(135deg,#ff758c,#ff7eb3);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    color:white;
-    z-index:2000;
-    padding:20px;
+    z-index:10;
 }
-.gift-page img{
-    width:90%;
-    max-width:320px;
-    border-radius:20px;
-    margin-bottom:20px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.5);
+/* DOWNLOAD CV BUTTON */
+.cv-section{
+  display:flex;
+  justify-content:center;
+  margin-top:-40px;   /* rotation ke close */
+  margin-bottom:60px; /* about se gap */
+  position:relative;
+  z-index:20;
 }
 
-/* Rose Petals */
-.petal{
-    position:absolute;
-    top:-10px;
-    font-size:20px;
-    animation: fall linear infinite;
-}
-@keyframes fall{
-    to{ transform: translateY(100vh) rotate(360deg); opacity:0;}
+.cv-btn{
+  background:var(--cta);
+  color:#000;
+  padding:16px 42px;
+  border-radius:60px;
+  font-size:16px;
+  font-weight:600;
+  text-decoration:none;
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
+  transition:.35s cubic-bezier(.135,.9,.15,1);
 }
 
-canvas{
+.cv-btn:hover{
+  transform:translateY(-6px);
+  box-shadow:0 40px 90px rgba(0,0,0,.45);
+}
+/* ================= HAMBURGER ================= */
+.menu-btn{
+  width:44px;
+  height:44px;
+  border:none;
+  background:transparent;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  cursor:pointer;
+  z-index:1001;
+}
+
+.menu-btn span{
+  height:2.5px;
+  width:22px;
+  background:var(--text);
+  border-radius:2px;
+  transition:.35s cubic-bezier(.135,.9,.15,1);
+}
+
+.menu-btn.active span:nth-child(1){
+  transform:translateY(8px) rotate(45deg);
+}
+.menu-btn.active span:nth-child(2){
+  opacity:0;
+}
+.menu-btn.active span:nth-child(3){
+  transform:translateY(-8px) rotate(-45deg);
+}
+/* ================= MOBILE ================= */
+@media(max-width:900px){
+
+  nav{
     position:fixed;
     top:0;
-    left:0;
-    pointer-events:none;
+    right:-100%;
+    width:78%;
+    height:100vh;
+    background:var(--pill);
+    flex-direction:column;
+    padding:120px 30px;
+    gap:26px;
+    transition:.45s cubic-bezier(.135,.9,.15,1);
+    z-index:1000;
+  }
+
+  nav.open{right:0;}
+
+  .menu-btn{display:flex;}
 }
+/* ================= PROJECTS SECTION STYLING ================= */
+.projects-section{
+  padding:60px 6% 100px; /* top, sides, bottom spacing */
+}
+
+.section-title{
+  text-align:center;
+  font-size:34px;
+  margin-bottom:50px;
+}
+
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:28px;
+}
+
+/* PROJECT CARD */
+.project-card{
+  background:var(--pill, #111);
+  padding:26px;
+  border-radius:22px;
+  transition:.45s cubic-bezier(.135,.9,.15,1);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    0 20px 55px rgba(0,0,0,.35);
+}
+
+.project-card:hover{
+  transform:translateY(-8px);
+}
+
+.project-card h3{
+  font-size:20px;
+  margin-bottom:6px;
+}
+
+.tools{
+  font-size:13px;
+  opacity:.75;
+  margin-bottom:12px;
+}
+
+.short-desc{
+  font-size:15px;
+  line-height:1.6;
+}
+
+/* READ MORE */
+.read-more-btn{
+  margin-top:18px;
+  padding:10px 26px;
+  border-radius:30px;
+  background:transparent;
+  border:1.5px solid var(--cta, #ccff5a);
+  color:var(--cta, #ccff5a);
+  font-weight:600;
+  cursor:pointer;
+  transition:.35s;
+}
+
+.read-more-btn:hover{
+  background:var(--cta, #ccff5a);
+  color:#000;
+  box-shadow:0 12px 35px rgba(204,255,90,.45);
+}
+
+/* EXPAND DETAILS */
+.full-details{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height .6s ease, opacity .4s ease;
+}
+
+.project-card.active .full-details{
+  max-height:600px;
+  opacity:1;
+  margin-top:14px;
+}
+
+.full-details p{
+  font-size:14.5px;
+  line-height:1.6;
+  opacity:.9;
+}
+/* ================= SKILLS SECTION ================= */
+.skills-section{
+  padding:40px 6%;
+  text-align:center;
+}
+
+.skills-title{
+  font-size:32px;
+  margin-bottom:28px;
+}
+
+/* Pills Container */
+.skills-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+}
+
+/* Pill */
+.skill-pill{
+  padding:10px 18px;
+  border-radius:40px;
+  background:var(--pill);
+  color:var(--text);
+  font-size:14.5px;
+  font-weight:500;
+  cursor:default;
+  transition:all .35s cubic-bezier(.135,.9,.15,1);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    0 10px 25px rgba(0,0,0,.25);
+}
+
+/* Hover Animation */
+.skill-pill:hover{
+  transform:translateY(-6px) scale(1.05);
+  background:var(--cta);
+  color:#000;
+  box-shadow:0 14px 40px rgba(204,255,90,.45);
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  .skills-title{
+    font-size:26px;
+  }
+
+  .skill-pill{
+    font-size:13.5px;
+    padding:9px 16px;
+  }
+}
+/* ================= EXPERIENCE SECTION ================= */
+.experience-section{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin:60px 0 30px;
+}
+
+/* TITLE */
+.experience-title{
+  font-size:32px;
+  font-weight:700;
+  margin-bottom:28px;
+  text-align:center;
+}
+
+/* CARD */
+.experience-card{
+  background:linear-gradient(145deg,#111,#0b0b0b);
+  padding:34px 52px;
+  border-radius:28px;
+  text-align:center;
+  transition:.45s cubic-bezier(.135,.9,.15,1);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 30px 90px rgba(0,0,0,.5);
+  color:#fff;
+}
+
+/* TEXT */
+.exp-years{
+  font-size:48px;
+  font-weight:800;
+  color:var(--cta);
+}
+
+.exp-label{
+  margin-top:6px;
+  font-size:15px;
+  opacity:.85;
+}
+
+.exp-role{
+  margin-top:12px;
+  font-size:14px;
+  opacity:.7;
+}
+
+/* HOVER */
+.experience-card:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 40px 110px rgba(204,255,90,.45);
+}
+
+/* ================= LIGHT THEME ================= */
+body.light .experience-card{
+  background:linear-gradient(145deg,#ffffff,#f2f2f2);
+  color:#000;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.08),
+    0 26px 70px rgba(0,0,0,.18);
+}
+
+body.light .exp-years{
+  color:#000;
+}
+
+body.light .exp-label,
+body.light .exp-role{
+  opacity:.75;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .experience-card{
+    padding:26px 36px;
+  }
+  .exp-years{
+    font-size:40px;
+  }
+  .experience-title{
+    font-size:26px;
+  }
+}
+/* ================= GLOBAL ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,Arial,sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:.4s ease;
+}
+
+/* ================= CONTACT SECTION ================= */
+.contact-section{
+  width:100%;
+  padding:90px 6% 70px;
+  display:flex;
+  justify-content:center;
+}
+
+.contact-card{
+  width:100%;
+  max-width:1000px;
+  border-radius:30px;
+  padding:60px;
+  background:var(--card-bg);
+  color:var(--text);
+  box-shadow:
+    inset 0 0 0 1px var(--border),
+    0 40px 100px rgba(0,0,0,.5);
+  transition:.45s cubic-bezier(.135,.9,.15,1);
+}
+
+.contact-card:hover{
+  transform:translateY(-8px);
+}
+
+/* TITLE */
+.contact-title{
+  font-size:36px;
+  font-weight:700;
+  margin-bottom:12px;
+  text-align:center;
+}
+
+.contact-subtitle{
+  text-align:center;
+  font-size:16px;
+  color:var(--muted);
+  margin-bottom:50px;
+}
+
+/* GRID */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+}
+
+/* LEFT INFO */
+.contact-info h3{
+  font-size:22px;
+  margin-bottom:14px;
+}
+
+.contact-info p{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--muted);
+  margin-bottom:28px;
+}
+
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:16px;
+  font-size:15px;
+}
+
+.contact-item span{
+  font-size:18px;
+}
+
+/* BUTTONS */
+.contact-links{
+  margin-top:26px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.contact-btn{
+  padding:12px 28px;
+  border-radius:40px;
+  background:transparent;
+  border:1.5px solid var(--cta);
+  color:var(--cta);
+  text-decoration:none;
+  font-weight:600;
+  transition:.35s cubic-bezier(.135,.9,.15,1);
+}
+
+.contact-btn:hover{
+  background:var(--cta);
+  color:#000;
+  box-shadow:0 14px 40px rgba(204,255,90,.45);
+}
+
+/* FORM */
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  padding:14px 18px;
+  border-radius:14px;
+  border:none;
+  outline:none;
+  background:#141414;
+  color:#fff;
+  font-size:15px;
+}
+
+body.light .contact-form input,
+body.light .contact-form textarea{
+  background:#fff;
+  color:#000;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);
+}
+
+.contact-form textarea{
+  resize:none;
+  min-height:120px;
+}
+
+.contact-form button{
+  margin-top:10px;
+  padding:14px;
+  border-radius:40px;
+  border:none;
+  background:var(--cta);
+  color:#000;
+  font-weight:700;
+  font-size:15px;
+  cursor:pointer;
+  transition:.35s cubic-bezier(.135,.9,.15,1);
+}
+
+.contact-form button:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 55px rgba(204,255,90,.5);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+  .contact-card{
+    padding:40px 28px;
+  }
+  .contact-title{
+    font-size:30px;
+  }
+}
+/* Social Icons Container */
+.social-icons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+/* Individual Icon Styling */
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #a6ff00; /* Neon green outline */
+  border-radius: 50%;
+  color: #a6ff00; /* Neon green icon color */
+  text-decoration: none;
+  font-size: 22px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #a6ff00; /* Neon green fill on hover */
+  color: #000; /* Icon turns black on hover */
+  transform: scale(1.1);
+}
+
 </style>
 </head>
-
 <body>
 
-<!-- Romantic Background Music -->
-<audio id="bgMusic" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
-</audio>
+<!-- HEADER -->
+<div class="header-wrap">
+<header id="header">
+  <div class="logo">
+  <img src="https://i.ibb.co/60fhp9Fx/Chat-GPT-Image-Jan-31-2026-12-16-31-AM-removebg-preview.png" alt="Satyaveer Singh Logo" style="height:60px; width:auto;">
+</div>
 
-<canvas id="confetti"></canvas>
+  <nav>
+    <a href="#">Services</a>
+    <a href="#">Projects</a>
+    <a href="#">About</a>
+    <a href="#">Skills</a>
+    <a href="#">Contact</a>
+  </nav>
 
-<div class="card">
+  <div class="right">
+    <button class="toggle" id="theme">☀️</button>
+    <!-- HAMBURGER -->
+    <button class="menu-btn" id="menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a href="https://zfrmz.in/XVHb1F2xuwWtUMUuMhp1" class="cta">Start a project </a>
+  </div>
+</header>
+</div>
 
-<div id="mainPage">
-    <h2>Hey My Love 💕</h2>
-    <p id="typeText" class="typewriter"></p>
-    <div id="buttons">
-        <button onclick="showSecond()">Yes of course 💖</button>
-        <button onclick="showTry()">No thanks</button>
+<!-- CENTER GLASS CARD -->
+<div class="intro-wrap">
+  <div class="intro-card">
+    <h1>I am <span>Satyaveer Singh</span></h1>
+    <p>Zoho One Developer • CRM • Creator • Automation</p>
+  </div>
+</div>
+
+<!-- ROTATING LOGOS -->
+<div class="rotator-wrap">
+  <div class="js-arched-image-container">
+    <div class="js-arched-image-inner">
+      <div class="js-arched-image-item" style="transform:rotate(110deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/B5vdgCJw/Chat-GPT-Image-Jan-31-2026-11-21-20-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(125deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/FbHw2SKj/Chat-GPT-Image-Jan-31-2026-10-35-19-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(140deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/PZMZKcbF/Chat-GPT-Image-Jan-31-2026-10-36-27-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(155deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/1JQ874v0/Chat-GPT-Image-Jan-31-2026-10-40-39-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(170deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/QvJT9fZd/Chat-GPT-Image-Jan-31-2026-10-42-57-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(185deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/xt9k6B9L/Chat-GPT-Image-Jan-31-2026-10-46-57-AM.png"></div>
+      </div>
+      
+      <div class="js-arched-image-item" style="transform:rotate(200deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/B5vdgCJw/Chat-GPT-Image-Jan-31-2026-11-21-20-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(215deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/Xfn4WMFF/Chat-GPT-Image-Jan-31-2026-10-53-25-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(230deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/ksPP0Rg0/Chat-GPT-Image-Jan-31-2026-11-01-42-AM.png"></div>
+      </div>
+      <!-- i've added new image  -->
+      <div class="js-arched-image-item" style="transform:rotate(245deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/KcXfpqhM/Chat-GPT-Image-Jan-31-2026-11-03-34-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(260deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/G3NHGTLR/Chat-GPT-Image-Jan-31-2026-11-08-09-AM.png"></div>
+      </div>
+      <div class="js-arched-image-item" style="transform:rotate(275deg) translateX(-50%)">
+        <div><img src="https://i.ibb.co/MDtBQTc9/Chat-GPT-Image-Jan-31-2026-11-11-50-AM.png"></div>
+      </div>
+      
     </div>
+  </div>
 </div>
+<!-- DOWNLOAD CV SECTION (JUST BELOW ROTATION) -->
+<div class="cv-section">
+  <a href="https://cyber24technologies-my.sharepoint.com/:w:/g/personal/satyaveer_singh_cyber24_com_au/IQBE6aLDyNmfRJlt34hFt9lgAa3_0rBqaeqZmM-vD29YpA4?download=1
+" download class="cv-btn">
+    Download CV
+  </a>
+</div>
+<!-- ABOUT ME SECTION -->
+<div class="about-wrap">
+  <div class="about-left">
+    <h2>About Me</h2>
+    <p>
+      I’m Satyaveer Singh, a dedicated Zoho One Developer passionate about building 
+      smart, automation-first solutions for growing businesses.<br><br>
+      With deep expertise in Zoho CRM, Creator, Desk, Books, HRMS, Finance and Analytics, 
+      I help companies streamline operations, automate workflows, and turn data 
+      into actionable insights.<br><br>
+      I believe in writing clean logic, designing intuitive interfaces, and 
+      delivering systems that are reliable, scalable, and easy to manage.<br><br>
+      <i>Zoho One isn’t just software — it’s a complete business operating system. I help companies unlock its full potential.</i>
+    </p>
+  </div>
 
-<div id="secondPage" style="display:none;">
-    <h2>Yay, You said Yes! 🎉💘</h2>
-    <button onclick="openGift(1)">Gift 1 🎁</button>
-    <button onclick="openGift(2)">Gift 2 🎀</button>
-    <button onclick="openGift(3)">Gift 3 💝</button>
+  <div class="about-right">
+    <img src="https://i.ibb.co/8nMZgDw4/Chat-GPT-Image-Jan-27-2026-11-06-26-PM.png?text=Professional+Image">
+    <a href="#" class="full-overlay">
+      
+    </a>
+  </div>
 </div>
+<!-- ================= PROJECTS SECTION ================= -->
+<section class="projects-section">
+  <h2 class="section-title">Projects</h2>
 
-</div>
+  <div class="projects-grid">
 
-<!-- Gift Page -->
-<div class="gift-page" id="giftPage">
-    <img id="giftImage">
-    <h2 id="giftTitle"></h2>
-    <p id="giftContent"></p>
-    <button onclick="closeGift()">Back 💕</button>
+    <!-- 1 -->
+    <div class="project-card">
+      <h3>Intel Migration</h3>
+      <p class="tools">Zoho CRM • Creator • Zoho Sign • Forms</p>
+      <p class="short-desc">Migration automation and client management.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>CRM workflows, Creator apps, forms and document signing automation.</p>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="project-card">
+      <h3>SmartFi Solution</h3>
+      <p class="tools">Zoho One</p>
+      <p class="short-desc">Finance and CRM automation.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>CRM, Books, Desk, Creator and Analytics implementation.</p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="project-card">
+      <h3>Isolution Project</h3>
+      <p class="tools">CRM • Creator • Books • Recruit • Desk • Payroll</p>
+      <p class="short-desc">Multi-role Zoho One application.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>Customer/admin portals with roles, permissions and automation.</p>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="project-card">
+      <h3>Ticketing Process with Rating</h3>
+      <p class="tools">Zoho Desk • Zoho Creator</p>
+      <p class="short-desc">Support system with dashboards.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>Ticket workflows, reports, ratings and Creator integration.</p>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="project-card">
+      <h3>AI & Third-Party Integrations</h3>
+      <p class="tools">ChatGPT • Gemini • WhatsApp • Webhooks</p>
+      <p class="short-desc">AI-powered Zoho integrations.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>AI, WhatsApp, widgets and external platform integrations.</p>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="project-card">
+      <h3>Unizent Pvt. Ltd.</h3>
+      <p class="tools">Zoho CRM</p>
+      <p class="short-desc">CRM customization and automation.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>Customized Zoho CRM modules, workflows and automation.</p>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="project-card">
+      <h3>Karunguru Real Estate</h3>
+      <p class="tools">Zoho CRM • Zoho Books</p>
+      <p class="short-desc">Real estate CRM and finance integration.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>
+          Leads, Contacts, Deals, custom modules, CRM–Books integration,
+          and customer portals using Deluge, HTML, CSS & Bootstrap.
+        </p>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="project-card">
+      <h3>ANG</h3>
+      <p class="tools">Zoho Creator • Mobile App • Customer Portal</p>
+      <p class="short-desc">Creator-based mobile application.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>Mobile app and customer portal using Zoho Creator.</p>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="project-card">
+      <h3>Inventory Management Project</h3>
+      <p class="tools">Zoho Inventory • Zoho Expenses • Zoho Projects</p>
+      <p class="short-desc">Inventory and expense management.</p>
+      <button class="read-more-btn">Read More</button>
+      <div class="full-details">
+        <p>Inventory tracking, expense control and project management integration.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="skills-section">
+  <h2 class="skills-title">Skills & Expertise</h2>
+
+  <div class="skills-pills">
+    <span class="skill-pill">Zoho One</span>
+    <span class="skill-pill">Zoho CRM</span>
+    <span class="skill-pill">Zoho Creator</span>
+    <span class="skill-pill">Deluge Scripting</span>
+    <span class="skill-pill">Workflow Automation</span>
+    <span class="skill-pill">Client Scripts</span>
+    <span class="skill-pill">Zoho Desk</span>
+    <span class="skill-pill">Zoho Books</span>
+    <span class="skill-pill">Zoho Inventory</span>
+    <span class="skill-pill">Zoho Analytics</span>
+    <span class="skill-pill">Zoho Flow</span>
+    <span class="skill-pill">API & Webhooks</span>
+    <span class="skill-pill">WhatsApp Integration</span>
+    <span class="skill-pill">AI (ChatGPT, Gemini) Integration</span>
+    <span class="skill-pill">HTML</span>
+    <span class="skill-pill">CSS</span>
+    <span class="skill-pill">JavaScript</span>
+    <span class="skill-pill">Customer Portals</span>
+    <span class="skill-pill">Role & Permission Management</span>
+  </div>
+</section>
+<section class="experience-section">
+  <h2 class="experience-title">Experience</h2>
+
+  <div class="experience-card">
+    <div class="exp-years">4+ Years</div>
+    <div class="exp-label">Professional Experience</div>
+    <div class="exp-role">Zoho One • CRM • Automation</div>
+  </div>
+</section>
+<!-- add class="light" here for light theme -->
+
+<section class="contact-section">
+  <div class="contact-card">
+
+    <h2 class="contact-title">Contact Me</h2>
+    <p class="contact-subtitle">
+      Let’s build smart, automation-first solutions with Zoho One
+    </p>
+
+    <div class="contact-grid">
+
+      <!-- LEFT -->
+      <div class="contact-info">
+        <h3>Satyaveer Singh</h3>
+        <p>
+          Zoho One Developer helping businesses automate CRM,
+          finance, HR and operations with clean logic and scalable systems.
+        </p>
+
+        <div class="contact-item">
+          <span>📧</span> satyaveersingh71851@gmail.com
+        </div>
+        <div class="contact-item">
+          <span>📞</span> +91 7068844134
+        </div>
+        <div class="contact-item">
+          <span>📍</span> India (Remote Available)
+        </div>
+
+        <div class="contact-links">
+          <a href="https://zfrmz.in/XVHb1F2xuwWtUMUuMhp1" class="contact-btn">
+            Start a Project
+          </a>
+
+          <a href="https://wa.me/917068844134" target="_blank" class="contact-btn">
+            WhatsApp
+          </a>
+
+          <a href="mailto:satyaveersingh71851@gmail.com" class="contact-btn">
+            Email Me
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT FORM -->
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <input type="tel" placeholder="Phone Number">
+        <textarea placeholder="Tell me about your project"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+
+    </div>
+
+  </div>
+</section>
+<!-- Social Media Floating Icons -->
+<div class="social-icons">
+  <a href="https://wa.me/917068844134" target="_blank" class="social-icon whatsapp" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/satyaveer-singh-bhadauriya" target="_blank" class="social-icon linkedin" aria-label="LinkedIn">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
 </div>
+<div class="hero"></div>
 
 <script>
-/* Typewriter */
-const message="Will you be my Valentine? 💖";
-let i=0;
-function typeWriter(){
-    if(i<message.length){
-        document.getElementById("typeText").innerHTML+=message.charAt(i);
-        i++;
-        setTimeout(typeWriter,80);
-    }
-}
-typeWriter();
+document.addEventListener("DOMContentLoaded",()=>{
 
-/* Button Flow */
-function showTry(){
-    document.getElementById("buttons").innerHTML=
-        '<button onclick="showYes()">Try Again 💔</button>';
-}
-function showYes(){
-    document.getElementById("buttons").innerHTML=
-        '<button onclick="showSecond()">Yes Of Course 💖</button>';
-}
-function showSecond(){
-    document.getElementById("mainPage").style.display="none";
-    document.getElementById("secondPage").style.display="block";
-    startConfetti();
-    document.getElementById("bgMusic").play();
-}
+  /* ===== MOBILE MENU ===== */
+  const menuBtn=document.getElementById("menu");
+  const nav=document.getElementById("nav");
 
-/* Gift Logic */
-function openGift(num){
-    let image="",title="",content="";
-    if(num==1){
-        image="https://artiflora-madagascar.com/wp-content/uploads/2024/01/10-red-roses-bouquet.jpg";
-        title="A Beautiful Rose Bouquet 🌹";
-        content="This bouquet is filled with love and happiness just for you!";
-    }
-    if(num==2){
-        image="https://www.24hrscityflorist.com/blog/wp-content/uploads/2024/12/Red-rose_edited2.jpg";
-        title="Romantic Surprise 💕";
-        content="Every rose whispers how special you are.";
-    }
-    if(num==3){
-        image="https://artiflora-madagascar.com/wp-content/uploads/2021/12/101-Red-Roses-Valentines-Day-Bouquet.jpg";
-        title="Forever Love 💘";
-        content="This bouquet represents pure love and forever happiness.";
-    }
+  if(menuBtn && nav){
+    menuBtn.onclick=()=>{
+      nav.classList.toggle("open");
+      menuBtn.textContent = nav.classList.contains("open") ? "✕" : "☰";
+    };
 
-    document.getElementById("giftImage").src=image;
-    document.getElementById("giftTitle").innerText=title;
-    document.getElementById("giftContent").innerText=content;
-    document.getElementById("giftPage").style.display="flex";
-    startPetals();
-}
-function closeGift(){
-    document.getElementById("giftPage").style.display="none";
-}
+    nav.querySelectorAll("a").forEach(link=>{
+      link.onclick=()=>{
+        nav.classList.remove("open");
+        menuBtn.textContent = "☰";
+      };
+    });
 
-/* Petals */
-function startPetals(){
-    for(let i=0;i<20;i++){
-        let petal=document.createElement("div");
-        petal.className="petal";
-        petal.innerHTML="🌹";
-        petal.style.left=Math.random()*100+"vw";
-        petal.style.animationDuration=(3+Math.random()*3)+"s";
-        document.body.appendChild(petal);
-        setTimeout(()=>petal.remove(),6000);
-    }
-}
+    document.addEventListener("click",(e)=>{
+      if(!nav.contains(e.target) && !menuBtn.contains(e.target)){
+        nav.classList.remove("open");
+        menuBtn.textContent = "☰";
+      }
+    });
+  }
 
-/* Confetti */
-function startConfetti(){
-    const canvas=document.getElementById("confetti");
-    const ctx=canvas.getContext("2d");
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
-    let confetti=[];
-    for(let i=0;i<100;i++){
-        confetti.push({
-            x:Math.random()*canvas.width,
-            y:Math.random()*canvas.height,
-            r:Math.random()*6+2,
-            color:"white"
-        });
+  /* ===== ROTATING LOGOS ===== */
+  const c=document.querySelector(".js-arched-image-container");
+  if(c){
+    let r=-170;
+    function animate(){
+      r-=0.02;
+      c.style.transform=`rotate(${r}deg)`;
+      requestAnimationFrame(animate);
     }
-    setInterval(()=>{
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        confetti.forEach(c=>{
-            ctx.beginPath();
-            ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
-            ctx.fillStyle=c.color;
-            ctx.fill();
-            c.y+=3;
-            if(c.y>canvas.height)c.y=0;
-        });
-    },20);
-}
+    animate();
+  }
+
+  /* ===== HEADER SHRINK ===== */
+  const header=document.getElementById("header");
+  let last=0;
+  window.addEventListener("scroll",()=>{
+    let y=scrollY;
+    y>last && y>80 ? header.classList.add("small") : header.classList.remove("small");
+    last=y;
+  });
+
+  /* ===== THEME TOGGLE ===== */
+  const themeBtn=document.getElementById("theme");
+  themeBtn.onclick=()=>{
+    document.body.classList.toggle("light");
+    themeBtn.textContent=document.body.classList.contains("light")?"🌙":"☀️";
+  };
+
+});
+document.querySelectorAll(".read-more-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const card = btn.closest(".project-card");
+    card.classList.toggle("active");
+    btn.textContent = card.classList.contains("active")
+      ? "Read Less" : "Read More";
+  });
+});
 </script>
+
 
 </body>
 </html>
