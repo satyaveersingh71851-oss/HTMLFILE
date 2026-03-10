@@ -369,7 +369,41 @@ body{
     color:white;
     cursor:pointer;
 }
+.image-container{
+display:flex;
+gap:20px;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+padding:40px 8%;
+}
 
+.image-container img{
+width:100%;
+max-width:400px;
+height:auto;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.image-container img:hover{
+transform:scale(1.05);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.image-container{
+flex-direction:column;
+gap:20px;
+}
+
+.image-container img{
+max-width:90%;
+}
+
+}
 /* MOBILE */
 @media(max-width:768px){
     .gallery-grid{
@@ -383,6 +417,133 @@ body{
     .gallery-grid{ grid-template-columns:1fr; }
     .heart-date{ width:80px;height:80px; }
     .heart-date span{ font-size:18px; }
+}
+/* =========================
+RESPONSIVE DESIGN
+========================= */
+
+@media (max-width:1024px){
+
+.hero h1{
+font-size:34px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.calendar{
+grid-template-columns:repeat(7,1fr);
+gap:6px;
+}
+
+.date{
+padding:10px 0;
+font-size:14px;
+}
+
+.gallery-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* MOBILE */
+@media (max-width:768px){
+
+.navbar{
+flex-direction:column;
+gap:10px;
+text-align:center;
+}
+
+.hero{
+padding:60px 20px;
+}
+
+.hero h1{
+font-size:26px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:15px;
+}
+
+.btn{
+padding:10px 20px;
+font-size:14px;
+}
+
+/* CALENDAR MOBILE */
+.calendar{
+grid-template-columns:repeat(7,minmax(35px,1fr));
+gap:5px;
+}
+
+.day-name{
+font-size:12px;
+}
+
+.date{
+font-size:13px;
+padding:8px 0;
+}
+
+/* COUNTDOWN */
+.calendar-box{
+gap:15px;
+}
+
+.heart-date{
+width:70px;
+height:70px;
+}
+
+.heart-date span{
+font-size:18px;
+}
+
+/* GALLERY */
+.gallery-grid{
+grid-template-columns:1fr;
+}
+
+.card img{
+height:auto;
+}
+
+.overlay{
+font-size:14px;
+padding:10px;
+}
+
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width:480px){
+
+.hero h1{
+font-size:22px;
+}
+
+.hero p{
+font-size:14px;
+}
+
+.heart-date{
+width:60px;
+height:60px;
+}
+
+.heart-date span{
+font-size:16px;
+}
+
+.date{
+font-size:12px;
+}
+
 }
 </style>
 </head>
